@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Realtime | MirandaCargo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: white; overflow-x: hidden; }
+        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        #map { height: 550px; width: 100%; border-radius: 1.5rem; z-index: 10; border: 1px solid rgba(255,255,255,0.1); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        .status-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        .card-selected-all { border: 2px solid rgba(250, 204, 21, 0.5) !important; background: rgba(255, 255, 255, 0.05); }
+        .card-selected-rota { border: 2px solid rgba(16, 185, 129, 0.5) !important; background: rgba(16, 185, 129, 0.05); }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+    <div class="max-w-[1600px] mx-auto space-y-6">
+        
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tighter text-white">Central de Comando <span class="text-emerald-500 text-xs animate-pulse ml-2">● LIVE</span></h1>
+                <p class="text-slate-400 text-sm">Monitoramento via Supabase Realtime</p>
+            </div>
+            <div class="flex gap-3">
+                <button id="refreshBtn" onclick="refreshDashboard()" class="px-5 py-2.5 bg-yellow-400 text-slate-900 rounded-xl hover:bg-yellow-300 transition-all font-bold text-sm">
+                    Sincronizar Agora
+                </button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-4 space-y-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <div id="cardTotal" onclick="filterByStatus('all')" class="glass-panel p-5 rounded-2xl cursor-pointer transition-all border-2 border-transparent card-selected-all">
+                        <p class="text-slate-400 text-[10px] uppercase font-bold tracking-widest">Cadastrados</p>
+                        <h3 id="totalDrivers" class="text-3xl font-bold mt-1 text-white">0</h3>
+                    </div>
+                    <div id="cardActive" onclick="filterByStatus('rota')" class="glass-panel p-5 rounded-2xl cursor-pointer transition-all border-2 border-transparent">
+                        <p class="text-emerald-500/80 text-[10px] uppercase font-bold tracking-widest">Em Rota</p>
+                        <h3 id="activeDrivers" class="text-3xl font-bold mt-1 text-emerald-400">0</h3>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col border border-white/5">
+                    <div class="p-4 border-b border-white/5 bg-white/5">
+                        <input type="text" id="driverSearch" placeholder="Buscar motorista..." class="w-full bg-slate-900/50 border border-white/10 rounded-lg py-2.5 px-4 text-xs focus:border-yellow-400 outline-none">
+                    </div>
+                    <div class="max-h-[480px] overflow-y-auto custom-scrollbar" id="driverList"></div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO SUPABASE
+        const SUPABASE_URL = 'SUA_URL_AQUI';
+        const SUPABASE_KEY = 'SUA_KEY_ANON_AQUI';
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let drivers = [];
+        let map, markers = {};
+        let currentFilter = 'all';
+
+        async function init() {
+            // Mapa
+            map = L.map('map', { zoomControl: false }).setView([-23.5505, -46.6333], 4);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
+
+            // 1. Carga Inicial
+            await loadDrivers();
+
+            // 2. Escuta Realtime (O Segredo do Tempo Real)
+            _supabase
+                .channel('schema-db-changes')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'drivers' }, payload => {
+                    handleRealtimeUpdate(payload);
+                })
+                .subscribe();
+        }
+
+        async function loadDrivers() {
+            const { data, error } = await _supabase.from('drivers').select('*');
+            if (data) {
+                drivers = data;
+                filterByStatus(currentFilter);
+            }
+        }
+
+        function handleRealtimeUpdate(payload) {
+            if (payload.eventType === 'UPDATE') {
+                const index = drivers.findIndex(d => d.id === payload.new.id);
+                if (index !== -1) {
+                    drivers[index] = payload.new;
+                    // Move o marcador suavemente no mapa sem recarregar a lista se estiver no foco
+                    if (markers[payload.new.id]) {
+                        markers[payload.new.id].setLatLng([payload.new.lat, payload.new.lng]);
+                    }
+                }
+            } else {
+                loadDrivers(); // Para Insert ou Delete, recarrega a lista
+            }
+        }
+
+        function renderDrivers(dataList) {
+            const list = document.getElementById('driverList');
+            list.innerHTML = '';
+            
+            // Remove marcadores antigos
+            Object.values(markers).forEach(m => map.removeLayer(m));
+            markers = {};
+
+            dataList.forEach(d => {
+                // Lista Lateral
+                const div = document.createElement('div');
+                div.className = `p-4 border-b border-white/5 hover:bg-white/5 cursor-pointer flex justify-between items-center`;
+                div.onclick = () => focusDriver(d.id);
+                div.innerHTML = `
+                    <div>
+                        <p class="font-bold text-sm">${d.name}</p>
+                        <p class="text-[10px] text-slate-500 uppercase">${d.truck}</p>
+                    </div>
+                    <span class="text-[9px] ${d.status === 'rota' ? 'text-emerald-400' : 'text-slate-500'} font-bold uppercase">${d.status}</span>
+                `;
+                list.appendChild(div);
+
+                // Marcador
+                markers[d.id] = L.circleMarker([d.lat, d.lng], {
+                    radius: 7,
+                    fillColor: d.status === 'rota' ? '#10b981' : '#64748b',
+                    color: "#fff", weight: 1, fillOpacity: 0.9
+                }).addTo(map);
+            });
+
+            document.getElementById('totalDrivers').innerText = drivers.length;
+            document.getElementById('activeDrivers').innerText = drivers.filter(d => d.status === 'rota').length;
+        }
+
+        function filterByStatus(status) {
+            currentFilter = status;
+            document.getElementById('cardTotal').classList.toggle('card-selected-all', status === 'all');
+            document.getElementById('cardActive').classList.toggle('card-selected-rota', status === 'rota');
+
+            const filtered = (status === 'all') ? drivers : drivers.filter(d => d.status === 'rota');
+            renderDrivers(filtered);
+        }
+
+        function refreshDashboard() {
+            loadDrivers();
+            const btn = document.getElementById('refreshBtn');
+            btn.innerText = "Sincronizado!";
+            setTimeout(() => btn.innerText = "Sincronizar Agora", 1000);
+        }
+
+        function focusDriver(id) {
+            const d = drivers.find(driver => driver.id === id);
+            if(d) map.flyTo([d.lat, d.lng], 12);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>MirandaCargo | Intermediação Logística de Elite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy-dark: #0a192f;
+      --navy-light: #112240;
+      --accent-yellow: #facc15;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--navy-dark);
+      color: #e2e8f0;
+      scroll-behavior: smooth;
+    }
+
+    /* Efeito de Vidro (Glassmorphism) */
+    .glass-nav {
+      background: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-gradient {
+      background: radial-gradient(circle at top right, #112240 0%, #0a192f 100%);
+    }
+
+    .btn-premium {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-premium:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(250, 204, 21, 0.4);
+    }
+
+    .badge-pill {
+      background: rgba(250, 204, 21, 0.1);
+      border: 1px solid rgba(250, 204, 21, 0.2);
+      color: var(--accent-yellow);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--navy-dark); }
+    ::-webkit-scrollbar-thumb { background: #233554; border-radius: 10px; }
+
+    /* Animações customizadas */
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-bounce-slow {
+      animation: bounce-slow 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+<header class="fixed w-full z-50 glass-nav">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <div class="bg-yellow-400 p-1.5 rounded-lg">
+        <svg class="w-6 h-6 text-navy-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+      </div>
+      <h1 class="text-xl font-bold tracking-tight text-white">MirandaCargo</h1>
+    </div>
+
+    <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+      <a href="#" class="hover:text-yellow-400 transition">Início</a>
+      <a href="#como-funciona" class="hover:text-yellow-400 transition">Como funciona</a>
+      <a href="#beneficios" class="hover:text-yellow-400 transition">Benefícios</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <a href="#cadastro" class="hidden sm:block bg-yellow-400 text-blue-950 px-5 py-2 rounded-lg font-bold btn-premium">Cadastre-se</a>
+      <a href="Login_motorista.html" class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-sm border border-white/10 transition inline-block">
+  Entrar
+</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero-gradient min-h-screen flex items-center justify-center pt-20 overflow-hidden relative">
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]"></div>
+  
+  <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+    <div data-aos="fade-up" class="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-pill text-xs font-bold mb-8 uppercase tracking-widest">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-yellow-400"></span>
+      </span>
+      Plataforma de intermediação logística
+    </div>
+
+    <h2 data-aos="fade-up" data-aos-delay="100" class="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] mb-8">
+      Intermediação de fretes <br>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-300">segura, inteligente e lucrativa</span>
+    </h2>
+
+    <p data-aos="fade-up" data-aos-delay="200" class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+      A MirandaCargo conecta cargas disponíveis a motoristas parceiros, com total transparência, suporte e eficiência em cada quilômetro.
+    </p>
+
+    <div data-aos="fade-up" data-aos-delay="300">
+      <a href="#cadastro" class="inline-flex items-center gap-3 bg-yellow-400 text-blue-950 px-10 py-5 rounded-xl text-lg font-extrabold btn-premium group">
+        <svg class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+        Quero receber fretes
+      </a>
+    </div>
+
+    <div data-aos="fade-up" data-aos-delay="400" class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/5 pt-10">
+      <div class="flex items-center justify-center gap-3 text-gray-400 text-sm italic">
+        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        Operação segura
+      </div>
+      <div class="flex items-center justify-center gap-3 text-gray-400 text-sm italic">
+        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+        Fretes recorrentes
+      </div>
+      <div class="flex items-center justify-center gap-3 text-gray-400 text-sm italic">
+        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+        Suporte completo
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona" class="py-32 bg-[#0d1b33]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-20">
+      <h3 data-aos="fade-up" class="text-4xl font-bold text-white mb-4">Como funciona</h3>
+      <div class="w-24 h-1 bg-yellow-400 mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div data-aos="fade-up" data-aos-delay="100" class="bg-navy-light p-10 rounded-3xl border border-white/5 hover:border-yellow-400/50 transition-all group">
+        <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">📦</div>
+        <h4 class="text-xl font-bold text-white mb-4">Carga disponível</h4>
+        <p class="text-gray-400 leading-relaxed">Conexão direta com as maiores plataformas e indústrias do país, garantindo fluxo constante de fretes.</p>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="200" class="bg-navy-light p-10 rounded-3xl border border-white/5 hover:border-yellow-400/50 transition-all group">
+        <div class="w-16 h-16 bg-yellow-400/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">🚚</div>
+        <h4 class="text-xl font-bold text-white mb-4">Match Inteligente</h4>
+        <p class="text-gray-400 leading-relaxed">Nossa tecnologia envia apenas as rotas que fazem sentido para o seu perfil de veículo e localização.</p>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="300" class="bg-navy-light p-10 rounded-3xl border border-white/5 hover:border-yellow-400/50 transition-all group">
+        <div class="w-16 h-16 bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">💰</div>
+        <h4 class="text-xl font-bold text-white mb-4">Lucratividade</h4>
+        <p class="text-gray-400 leading-relaxed">Transparência total nos valores. Você recebe sua comissão de forma rápida e segura, sem burocracia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="beneficios" class="py-32 bg-white relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+    
+    <div data-aos="fade-right">
+      <span class="bg-[#fff8e1] text-[#b8860b] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6 inline-block">
+        Para motoristas
+      </span>
+      <h2 class="text-4xl md:text-5xl font-extrabold text-[#0f172a] leading-tight mb-6">
+        Para motoristas <br>parceiros
+      </h2>
+      <p class="text-slate-500 text-lg mb-10 leading-relaxed max-w-md">
+        Receba fretes direto no WhatsApp, com suporte e segurança em cada etapa da sua jornada.
+      </p>
+
+      <ul class="space-y-6">
+        <li class="flex items-center gap-4 group">
+          <div class="w-10 h-10 flex-shrink-0 bg-yellow-400/10 rounded-xl flex items-center justify-center text-yellow-500 group-hover:bg-yellow-400 group-hover:text-white transition-all duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="text-slate-700 font-semibold text-lg">Fretes recorrentes</span>
+        </li>
+        <li class="flex items-center gap-4 group">
+          <div class="w-10 h-10 flex-shrink-0 bg-yellow-400/10 rounded-xl flex items-center justify-center text-yellow-500 group-hover:bg-yellow-400 group-hover:text-white transition-all duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="text-slate-700 font-semibold text-lg">Sem taxas escondidas</span>
+        </li>
+        <li class="flex items-center gap-4 group">
+          <div class="w-10 h-10 flex-shrink-0 bg-yellow-400/10 rounded-xl flex items-center justify-center text-yellow-500 group-hover:bg-yellow-400 group-hover:text-white transition-all duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <span class="text-slate-700 font-semibold text-lg">Suporte durante toda entrega</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="relative" data-aos="zoom-in-left">
+      <div class="absolute -inset-10 bg-yellow-400/10 rounded-full blur-[100px] -z-10"></div>
+      
+      <div class="bg-[#f8fafc] rounded-[32px] shadow-[0_32px_64px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-8 md:p-10 max-w-md mx-auto relative overflow-hidden">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="w-14 h-14 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg shadow-yellow-400/30">
+            <svg class="w-7 h-7 text-navy-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.319 1.592 5.548 0 10.058-4.51 10.061-10.062.001-2.69-1.047-5.216-2.953-7.124-1.904-1.906-4.43-2.956-7.118-2.956-5.548 0-10.06 4.512-10.063 10.064-.001 2.032.547 3.541 1.534 5.106l-1.004 3.667 3.753-.984zm11.367-1.254c.18-.01.353-.01.523-.01.336 0 .542-.112.723-.42.18-.31.723-1.761.79-1.89.066-.13.11-.281.022-.451-.087-.171-.377-.282-.558-.394-.18-.112-.723-.42-.723-.42l-.564-.32c-.171-.09-.342-.01-.482.13l-.532.65c-.13.16-.312.18-.532.08-.23-.11-.976-.36-1.861-1.15-.688-.61-1.153-1.37-1.287-1.6-.134-.23-.014-.35.1-.47.103-.103.232-.27.35-.41.116-.14.156-.24.232-.4.075-.16.038-.3-.02-.41-.058-.11-.532-1.28-.73-1.75-.19-.47-.38-.41-.53-.41h-.45c-.17 0-.45.06-.68.32-.23.25-.89.87-.89 2.12 0 1.25.91 2.46 1.03 2.63.13.17 1.79 2.74 4.33 3.84.6.26 1.08.42 1.45.54.61.19 1.16.16 1.59.1.48-.06 1.48-.6 1.69-1.19.21-.58.21-1.08.14-1.19-.07-.11-.25-.17-.53-.28z"/></svg>
+          </div>
+          <div>
+            <h4 class="text-slate-900 font-bold text-xl">MirandaCargo</h4>
+            <span class="text-slate-400 text-sm font-medium">Via WhatsApp</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-100/50 rounded-2xl p-6 mb-4 border border-slate-200/50">
+          <p class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Nova carga disponível</p>
+          <p class="text-slate-900 font-bold text-lg mb-1">São Paulo → Rio de Janeiro</p>
+          <p class="text-yellow-500 font-extrabold text-xl">R$ 2.500,00</p>
+        </div>
+
+        <div class="bg-slate-100/50 rounded-2xl p-6 mb-6 border border-slate-200/50">
+          <p class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Tipo de carga</p>
+          <p class="text-slate-800 font-semibold">Eletrônicos - 8 toneladas</p>
+        </div>
+
+        <div class="pt-6 border-t border-slate-200 flex justify-center">
+          <div class="flex items-center gap-2 text-slate-400 font-medium text-sm">
+            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            Aceite direto pelo WhatsApp
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 animate-bounce-slow hidden md:block">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+          <span class="text-slate-700 font-bold text-xs uppercase">Motorista Online</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cadastro" class="py-32 relative overflow-hidden bg-navy-dark">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -z-10"></div>
+    
+    <div class="max-w-xl mx-auto px-6 relative z-10">
+        <div data-aos="zoom-in" class="bg-white rounded-[40px] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] border border-white/10" id="formContainer">
+            
+            <div class="p-10 cursor-pointer group text-center" id="formHeader">
+                <div class="w-20 h-20 bg-yellow-400/10 rounded-3xl mx-auto flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 relative">
+                    <svg class="w-10 h-10 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path>
+                    </svg>
+                    <div class="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 border-2 border-white rounded-full animate-pulse"></div>
+                </div>
+
+                <div class="inline-flex items-center gap-2 bg-yellow-400/10 text-yellow-600 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest mb-4">
+                    ✨ Cadastre-se GRÁTIS
+                </div>
+                
+                <h3 class="text-3xl font-black text-slate-900 mb-2 flex items-center justify-center gap-3">
+                    Cadastro de Motoristas
+                    <span id="expandIcon" class="bg-slate-100 p-2 rounded-full transition-transform duration-500">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </span>
+                </h3>
+                <p class="text-slate-500 font-medium" id="formSubtext">Clique aqui para abrir o formulário</p>
+                
+                <div class="mt-6 flex justify-center items-center gap-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
+                    <span class="text-green-600 text-[10px] font-bold uppercase tracking-tighter italic">Vagas disponíveis agora</span>
+                </div>
+            </div>
+
+            <div class="max-h-0 opacity-0 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]" id="formBody">
+                <div class="p-10 pt-0 border-t border-slate-50">
+                    <form id="formMotorista" class="space-y-5">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase ml-2 tracking-widest">Nome completo</label>
+                            <input name="nome" required placeholder="Digite seu nome completo" class="w-full bg-slate-50 border-none p-4 rounded-2xl text-slate-900 focus:ring-2 focus:ring-yellow-400 transition-all outline-none">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-2 tracking-widest">Seu melhor e-mail</label>
+                                <input type="email" name="email" required placeholder="exemplo@email.com" class="w-full bg-slate-50 border-none p-4 rounded-2xl text-slate-900 focus:ring-2 focus:ring-yellow-400 transition-all outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-2 tracking-widest">Senha</label>
+                                <input type="password" name="senha" required placeholder="Mínimo 6 caracteres" class="w-full bg-slate-50 border-none p-4 rounded-2xl text-slate-900 focus:ring-2 focus:ring-yellow-400 transition-all outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-2 tracking-widest">CPF</label>
+                                <input name="cpf" required placeholder="000.000.000-00" class="w-full bg-slate-50 border-none p-4 rounded-2xl text-slate-900 focus:ring-2 focus:ring-yellow-400 transition-all outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-2 tracking-widest">Cidade / UF</label>
+                                <input name="cidade" required placeholder="Ex: São Paulo / SP" class="w-full bg-slate-50 border-none p-4 rounded-2xl text-slate-900 focus:ring-2 focus:ring-yellow-400 transition-all outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-2 tracking-widest">WhatsApp</label>
+                                <input name="whatsapp" required placeholder="(00) 00000-0000" class="w-full bg-slate-50 border-none p-4 rounded-2xl text-slate-900 focus:ring-2 focus:ring-yellow-400 transition-all outline-none">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-2 tracking-widest">CNH (Número do registro)</label>
+                                <input name="cnh" required placeholder="Digite o número da CNH" class="w-full bg-slate-50 border-none p-4 rounded-2xl text-slate-900 focus:ring-2 focus:ring-yellow-400 transition-all outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-2 tracking-widest">Placa do veículo</label>
+                                <input name="placa" required placeholder="Ex: ABC1D23" class="w-full bg-slate-50 border-none p-4 rounded-2xl text-slate-900 focus:ring-2 focus:ring-yellow-400 transition-all outline-none uppercase">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-2 tracking-widest">Tipo de veículo</label>
+                                <select name="veiculo" required class="w-full bg-slate-50 border-none p-4 rounded-2xl text-slate-500 focus:ring-2 focus:ring-yellow-400 outline-none">
+                                    <option value="">Selecione o tipo</option>
+                                    <option>Utilitário</option><option>VUC</option><option>3/4</option><option>Toco</option><option>Truck</option><option>Carreta</option><option>HR</option><option>Kia Bongo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-yellow-400 text-blue-950 py-5 rounded-[20px] font-black text-lg btn-premium flex items-center justify-center gap-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Enviar cadastro
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="py-16 bg-navy-dark border-t border-white/5 text-center relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="flex items-center justify-center gap-2 mb-8">
+      <div class="bg-yellow-400 p-1.5 rounded-lg">
+        <svg class="w-6 h-6 text-navy-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+      </div>
+      <h1 class="text-xl font-black tracking-tight text-white uppercase italic">MirandaCargo</h1>
+    </div>
+
+    <p class="text-gray-500 text-sm max-w-sm mx-auto mb-8">
+      Tecnologia avançada para quem move o Brasil de ponta a ponta. Junte-se à elite logística.
+    </p>
+
+    <div class="flex items-center justify-center gap-4 mb-10">
+      <a href="https://www.instagram.com/" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-yellow-400 hover:text-navy-dark hover:border-yellow-400 transition-all duration-300">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      </a>
+      <a href="https://wa.me/11916545229" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-green-500 hover:border-green-500 transition-all duration-300">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.03c0 2.122.554 4.197 1.613 6.06L0 24l6.117-1.605a11.845 11.845 0 005.933 1.598h.005c6.637 0 12.032-5.395 12.034-12.03a11.83 11.83 0 00-3.525-8.508z"/></svg>
+      </a>
+      <a href="mailto:contato@mirandacargo.com.br" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-blue-500 hover:border-blue-500 transition-all duration-300">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </a>
+    </div>
+
+    <div class="pt-10 border-t border-white/5 text-gray-600 text-[10px] uppercase tracking-[0.2em]">
+        © 2026 MirandaCargo — Todos os direitos reservados.
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true });
+
+  // LÓGICA DO ACCORDION PREMIUM
+  const formHeader = document.getElementById('formHeader');
+  const formBody = document.getElementById('formBody');
+  const formContainer = document.getElementById('formContainer');
+  const expandIcon = document.getElementById('expandIcon');
+  const formSubtext = document.getElementById('formSubtext');
+
+  formHeader.addEventListener('click', () => {
+      const isOpen = formBody.classList.contains('max-h-[1500px]');
+      
+      if (!isOpen) {
+          formBody.classList.remove('max-h-0', 'opacity-0');
+          formBody.classList.add('max-h-[1500px]', 'opacity-100');
+          expandIcon.classList.add('rotate-180', 'bg-yellow-400', 'text-white');
+          formSubtext.innerText = "Preencha seus dados abaixo para continuar";
+          setTimeout(() => {
+              formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 500);
+      } else {
+          formBody.classList.remove('max-h-[1500px]', 'opacity-100');
+          formBody.classList.add('max-h-0', 'opacity-0');
+          expandIcon.classList.remove('rotate-180', 'bg-yellow-400', 'text-white');
+          formSubtext.innerText = "Clique aqui para abrir o formulário";
+      }
+  });
+
+  // ENVIO DO FORMULÁRIO
+  document.getElementById("formMotorista").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const data = new FormData(this);
+    let msg = "*NOVO CADASTRO DE MOTORISTA*%0A%0A";
+    msg += `*Nome:* ${data.get('nome')}%0A*WhatsApp:* ${data.get('whatsapp')}%0A*Cidade:* ${data.get('cidade')}%0A*Veículo:* ${data.get('veiculo')}%0A*Placa:* ${data.get('placa')}`;
+    window.open(`https://wa.me/5511985031931?text=${msg}`, "_blank");
+  });
+</script>
+
+</body>
+</html>

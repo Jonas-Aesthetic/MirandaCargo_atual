@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Administrativa | MirandaCargo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #051126; /* Navy Dark profundo das imagens fornecidas */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Efeito de luz surreal ao fundo */
+        .bg-glow {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.03) 0%, rgba(5, 17, 38, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 1;
+        }
+
+        .admin-card {
+            background: rgba(255, 255, 255, 0.95); /* Design baseado na imagem da área administrativa */
+            backdrop-filter: blur(15px);
+            border-radius: 1.5rem;
+            padding: 3rem 2.5rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Botão de voltar posicionado no canto superior esquerdo do card */
+        .back-button {
+            position: absolute;
+            top: -45px;
+            left: 0;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            color: #ffffff;
+            transform: translateX(-5px);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .admin-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3.5rem;
+            background: #f1f5f9;
+            border: 2px solid transparent;
+            border-radius: 0.75rem;
+            color: #1e293b;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .admin-input:focus {
+            outline: none;
+            border-color: #d9a406; /* Dourado escuro para foco */
+            background: #ffffff;
+            box-shadow: 0 0 20px rgba(217, 164, 6, 0.1);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            z-index: 10;
+        }
+
+        .btn-admin {
+            width: 100%;
+            background-color: #d9a406; /* Cor do botão admin baseada na imagem */
+            color: #051126;
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            transition: all 0.4s ease;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-admin:hover {
+            background-color: #b8860b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(217, 164, 6, 0.3);
+        }
+
+        .lock-container {
+            background: #fef9c3;
+            width: 64px;
+            height: 64px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div class="admin-card">
+        <a href="MirandaCargo.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Voltar ao site
+        </a>
+
+        <div class="lock-container">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+        </div>
+
+        <h1 class="text-2xl font-bold text-slate-800 mb-1">Área Administrativa</h1>
+        <p class="text-slate-500 text-sm mb-10">Acesso restrito</p>
+
+        <form id="adminLoginForm">
+            <div class="input-group">
+                <label class="block text-xs font-bold text-slate-400 uppercase ml-1 mb-2 tracking-widest">E-mail</label>
+                <div class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <input type="email" id="adminEmail" placeholder="admin@mirandacargo.com" class="admin-input" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="block text-xs font-bold text-slate-400 uppercase ml-1 mb-2 tracking-widest">Senha</label>
+                <div class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <input type="password" id="adminPassword" placeholder="••••••••" class="admin-input" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-admin">
+                Entrar
+            </button>
+
+            <p class="mt-8 text-xs text-slate-400">
+                Não tem conta? <a href="#" class="text-yellow-600 font-bold hover:underline">Criar agora</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        // Administrador estabelecido diretamente no código
+        const ADMIN_DATA = {
+            email: "admin@mirandacargo.com",
+            password: "admin"
+        };
+
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('adminEmail').value;
+            const pass = document.getElementById('adminPassword').value;
+
+            if (email === ADMIN_DATA.email && pass === ADMIN_DATA.password) {
+                const btn = this.querySelector('button');
+                btn.innerHTML = "Verificando...";
+                setTimeout(() => {
+                    alert("Bem-vindo, Administrador!");
+                    // Redirecionamento futuro
+                }, 1000);
+            } else {
+                alert("Credenciais de administrador inválidas!");
+            }
+        });
+    </script>
+</body>
+</html>

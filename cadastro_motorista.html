@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta | MirandaCargo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #051126;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .input-field:focus {
+            border-color: #facc15;
+            background: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.15);
+            outline: none;
+        }
+
+        /* CORREÇÃO AQUI: Garante que as letras das opções sejam pretas e visíveis */
+        #truck_type option {
+            color: #000000 !important;
+            background-color: #ffffff !important;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.1) 0%, rgba(5, 17, 38, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #051126; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen py-10 px-4">
+
+    <div class="bg-glow -top-48 -left-48"></div>
+    <div class="bg-glow -bottom-48 -right-48"></div>
+
+    <div class="w-full max-w-2xl z-10">
+        <a href="Login_motorista.html" class="flex items-center gap-2 text-gray-400 hover:text-yellow-400 transition-all mb-6 text-sm group w-fit">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Voltar ao login
+        </a>
+
+        <div class="glass-card rounded-[2.5rem] p-8 md:p-12">
+            <div class="flex items-center gap-5 mb-10">
+                <div class="bg-yellow-400 p-3 rounded-2xl shadow-xl shadow-yellow-400/20">
+                    <svg class="w-8 h-8 text-[#051126]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight">Criar Conta</h1>
+                    <p class="text-gray-400 text-sm uppercase tracking-[0.2em]">Portal do Motorista</p>
+                </div>
+            </div>
+
+            <form id="registerForm" class="space-y-6">
+                <div>
+                    <label class="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 ml-1">Nome Completo</label>
+                    <input type="text" id="fullname" placeholder="Ex: João Silva" class="input-field w-full px-5 py-4 rounded-2xl text-white placeholder-gray-600" required>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 ml-1">E-mail</label>
+                        <input type="email" id="email" placeholder="seu@email.com" class="input-field w-full px-5 py-4 rounded-2xl text-white placeholder-gray-600" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 ml-1">WhatsApp</label>
+                        <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" class="input-field w-full px-5 py-4 rounded-2xl text-white placeholder-gray-600" required>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 ml-1">Senha</label>
+                        <input type="password" id="password" placeholder="••••••••" class="input-field w-full px-5 py-4 rounded-2xl text-white placeholder-gray-600" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 ml-1">Confirmar Senha</label>
+                        <input type="password" id="confirm_password" placeholder="••••••••" class="input-field w-full px-5 py-4 rounded-2xl text-white placeholder-gray-600" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2 ml-1">Tipo de Veículo</label>
+                    <select id="truck_type" class="input-field w-full px-5 py-4 rounded-2xl text-white appearance-none cursor-pointer focus:text-white">
+                        <option value="" class="text-black">Selecione seu veículo</option>
+                        <option value="fiorino" class="text-black">Fiorino / Van</option>
+                        <option value="toco" class="text-black">Caminhão Toco</option>
+                        <option value="truck" class="text-black">Caminhão Truck</option>
+                        <option value="carreta" class="text-black">Carreta</option>
+                        <option value="HR" class="text-black">HR</option>
+                        <option value="Bongo" class="text-black">Kia Bongo</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="btnSubmit" class="w-full bg-yellow-400 hover:bg-yellow-300 hover:scale-[1.02] active:scale-[0.98] text-[#051126] font-black py-5 rounded-2xl transition-all shadow-2xl shadow-yellow-400/20 text-lg mt-4">
+                    Finalizar Cadastro
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const SUBAPASE_URL = "SUA_URL_AQUI";
+        const SUPABASE_KEY = "SUA_ANON_KEY_AQUI";
+        const supabase = typeof supabase !== 'undefined' ? supabase.createClient(SUBAPASE_URL, SUPABASE_KEY) : null;
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmit');
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirm_password').value;
+
+            if (password !== confirm) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            btn.innerHTML = `<span class="animate-pulse">Processando...</span>`;
+            btn.disabled = true;
+
+            if (supabase) {
+                const { data, error } = await supabase.auth.signUp({
+                    email: document.getElementById('email').value,
+                    password: password,
+                    options: {
+                        data: {
+                            full_name: document.getElementById('fullname').value,
+                            whatsapp: document.getElementById('whatsapp').value,
+                            truck_type: document.getElementById('truck_type').value
+                        }
+                    }
+                });
+
+                if (error) {
+                    alert("Erro: " + error.message);
+                    btn.innerHTML = "Finalizar Cadastro";
+                    btn.disabled = false;
+                } else {
+                    alert("Cadastro realizado! Verifique seu e-mail.");
+                    window.location.href = "login.html";
+                }
+            } else {
+                setTimeout(() => {
+                    alert("Interface funcional! Configure o Supabase para salvar os dados.");
+                    btn.innerHTML = "Finalizar Cadastro";
+                    btn.disabled = false;
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
